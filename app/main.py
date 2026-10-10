@@ -47,6 +47,8 @@ def startup():
     db.close()
 
 
+from .routers.monetization_router import router as monetization_router
+
 # ── ROUTERS ───────────────────────────────────────────────────
 app.include_router(auth_router)
 app.include_router(users_router)
@@ -57,6 +59,7 @@ app.include_router(matching_router)
 app.include_router(projects_router)
 app.include_router(leaderboard_router)
 app.include_router(admin_router)
+app.include_router(monetization_router)
 
 
 # ── STATIC FRONTEND ───────────────────────────────────────────

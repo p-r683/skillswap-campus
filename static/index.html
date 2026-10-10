@@ -166,6 +166,9 @@
         <button onclick="gotoTab('leaderboard')" id="nav-leaderboard" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold flex items-center gap-1.5 text-slate-400 hover:text-white transition">
           <i data-lucide="trophy" class="w-4 h-4"></i>Board
         </button>
+        <button onclick="gotoTab('pricing')" id="nav-pricing" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-semibold flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition bg-amber-500/10 border border-amber-500/25">
+          <i data-lucide="sparkle" class="w-4 h-4"></i>Pricing & Pro
+        </button>
       </nav>
 
       <!-- User credit + avatar -->
@@ -397,6 +400,67 @@
       </div>
     </div>
 
+    <!-- ── PRICING & MONETIZATION ── -->
+    <div id="tab-pricing" class="hidden space-y-8 max-w-5xl mx-auto">
+      <!-- Header Banner -->
+      <div class="glass p-6 rounded-3xl text-center bg-gradient-to-r from-amber-500/10 via-sky-500/10 to-indigo-500/10 border border-amber-500/30">
+        <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold uppercase tracking-wider mb-2">💎 Campus Pro & Credits</span>
+        <h2 class="text-3xl font-extrabold text-white">Unlock Unlimited Peer Mentoring</h2>
+        <p class="text-slate-300 text-sm max-w-xl mx-auto mt-2">Top up your skill credits, enroll in weekend student bootcamps, get official peer-teaching certificates, or partner your university.</p>
+      </div>
+
+      <!-- SECTION 1: CREDIT PACKAGES -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold flex items-center gap-2"><i data-lucide="coins" class="w-5 h-5 text-amber-400"></i>Skill Credit Packs</h3>
+          <span class="text-xs text-slate-400">Instant UPI / Card Payment (Simulated)</span>
+        </div>
+        <div id="credit-packs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- SECTION 2: WORKSHOPS & BOOTCAMPS -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-xl font-bold flex items-center gap-2"><i data-lucide="presentation" class="w-5 h-5 text-indigo-400"></i>Sponsored Student Bootcamps</h3>
+            <p class="text-xs text-slate-400">Weekend group masterclasses led by top-rated seniors</p>
+          </div>
+        </div>
+        <div id="workshops-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- SECTION 3: VERIFIED RESUME CERTIFICATES -->
+      <div class="glass p-6 rounded-3xl border border-slate-800 space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-bold flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-emerald-400"></i>Verified Teaching Certificates</h3>
+            <p class="text-xs text-slate-400 mt-1">Official proof of your peer mentoring hours, ratings, and student endorsements for LinkedIn & Resumes.</p>
+          </div>
+          <button onclick="claimCertificate()" class="btn-primary text-xs flex items-center gap-2 shrink-0">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>Claim Certificate (₹99)
+          </button>
+        </div>
+        <div id="certificates-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3"></div>
+      </div>
+
+      <!-- SECTION 4: COLLEGE INSTITUTIONAL B2B -->
+      <div class="glass p-6 rounded-3xl border border-sky-500/30 bg-gradient-to-r from-sky-950/40 to-slate-900 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-400">For Universities & Colleges</span>
+          <h3 class="text-2xl font-black text-white mt-1">SkillSwap Institutional Campus License</h3>
+          <p class="text-slate-300 text-sm max-w-xl mt-2">Equip your campus with private branded skill discovery, automated NAAC/NBA collaborative learning documentation, and real-time TPO placement readiness analytics.</p>
+          <div class="flex flex-wrap gap-2 mt-4 text-xs">
+            <span class="px-2.5 py-1 bg-sky-500/10 text-sky-300 rounded-lg border border-sky-500/20">✓ NAAC Criteria 2 Peer Learning</span>
+            <span class="px-2.5 py-1 bg-sky-500/10 text-sky-300 rounded-lg border border-sky-500/20">✓ Official Domain Verification</span>
+            <span class="px-2.5 py-1 bg-sky-500/10 text-sky-300 rounded-lg border border-sky-500/20">✓ Admin Analytics Portal</span>
+          </div>
+        </div>
+        <button onclick="openCollegeInquiryModal()" class="btn-primary text-sm whitespace-nowrap bg-gradient-to-r from-sky-500 to-indigo-600 px-6 py-3">
+          Request College Proposal →
+        </button>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -500,6 +564,77 @@
     <div class="flex gap-3">
       <button onclick="closeModal('modal-project')" class="btn-secondary flex-1 text-sm">Cancel</button>
       <button onclick="submitProject()" class="btn-primary flex-1 text-sm">Post Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- Simulated UPI / Card Payment Modal -->
+<div id="modal-payment" class="modal-overlay hidden">
+  <div class="glass w-full max-w-sm rounded-2xl p-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="credit-card" class="w-5 h-5 text-amber-400"></i>Complete Top-Up</h3>
+      <button onclick="closeModal('modal-payment')" class="text-slate-400 hover:text-white text-xl">&times;</button>
+    </div>
+    <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2">
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-400">Package:</span>
+        <span id="pay-pack-name" class="font-bold text-white">Campus Pro</span>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-400">Credits Added:</span>
+        <span id="pay-pack-credits" class="font-bold text-amber-400">+100 🪙</span>
+      </div>
+      <div class="flex justify-between text-sm border-t border-slate-800 pt-2">
+        <span class="font-semibold text-slate-300">Total Price:</span>
+        <span id="pay-pack-price" class="font-black text-emerald-400 text-lg">₹399</span>
+      </div>
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-400 mb-1.5">Payment Method</label>
+      <select id="pay-method">
+        <option value="UPI">⚡ Google Pay / PhonePe / Paytm UPI</option>
+        <option value="Card">💳 Credit / Debit Card</option>
+        <option value="NetBanking">🏛️ Net Banking</option>
+      </select>
+    </div>
+    <input type="hidden" id="pay-pack-id"/>
+    <div class="flex gap-3">
+      <button onclick="closeModal('modal-payment')" class="btn-secondary flex-1 text-sm">Cancel</button>
+      <button onclick="confirmPayment()" class="btn-primary flex-1 text-sm bg-gradient-to-r from-emerald-600 to-teal-600">Pay Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- College B2B Inquiry Modal -->
+<div id="modal-college-inquiry" class="modal-overlay hidden">
+  <div class="glass w-full max-w-md rounded-2xl p-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="building-2" class="w-5 h-5 text-sky-400"></i>Partner Your Institution</h3>
+      <button onclick="closeModal('modal-college-inquiry')" class="text-slate-400 hover:text-white text-xl">&times;</button>
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-400 mb-1.5">College / University Name</label>
+      <input id="inq-college" type="text" placeholder="e.g. Dr. A.P.J. Abdul Kalam Technical University"/>
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-400 mb-1.5">Your Name & Designation</label>
+      <input id="inq-person" type="text" placeholder="e.g. Dr. Rajesh Verma (Dean of Student Affairs / TPO)"/>
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-400 mb-1.5">Official Institutional Email</label>
+      <input id="inq-email" type="email" placeholder="dean.academics@aktu.edu.in"/>
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-400 mb-1.5">Approx. Student Enrollment</label>
+      <select id="inq-students">
+        <option value="1500">500 – 2,000 Students (Department License)</option>
+        <option value="5000" selected>2,000 – 10,000 Students (Campus License)</option>
+        <option value="25000">10,000+ Students (University License)</option>
+      </select>
+    </div>
+    <div class="flex gap-3 pt-2">
+      <button onclick="closeModal('modal-college-inquiry')" class="btn-secondary flex-1 text-sm">Cancel</button>
+      <button onclick="submitCollegeInquiry()" class="btn-primary flex-1 text-sm">Submit Request</button>
     </div>
   </div>
 </div>
@@ -654,7 +789,7 @@ function updateHeader() {
 }
 
 // ─── TABS ─────────────────────────────────────────────────────────────────
-const TAB_IDS = ['dashboard','marketplace','aimatch','requests','sessions','projects','leaderboard','profile'];
+const TAB_IDS = ['dashboard','marketplace','aimatch','requests','sessions','projects','leaderboard','profile','pricing'];
 
 function gotoTab(tab) {
   activeTab = tab;
@@ -674,6 +809,7 @@ function gotoTab(tab) {
   if (tab === 'projects')      loadProjects();
   if (tab === 'leaderboard')   loadLeaderboard();
   if (tab === 'profile')       loadProfile();
+  if (tab === 'pricing')       loadPricing();
 }
 
 // ─── DASHBOARD ────────────────────────────────────────────────────────────
@@ -1201,6 +1337,149 @@ async function saveProfileSkills() {
     allUsers = await api('GET', '/api/users');
     notify('Skills updated!', 'success');
   } catch (e) { notify(e.message, 'error'); }
+}
+
+// ─── PRICING & MONETIZATION LOGIC ─────────────────────────────────────────
+async function loadPricing() {
+  await Promise.all([loadPackages(), loadWorkshops(), loadCertificates()]);
+  lucide.createIcons();
+}
+
+async function loadPackages() {
+  const packs = await api('GET', '/api/monetization/packages');
+  document.getElementById('credit-packs-grid').innerHTML = packs.map(p => `
+    <div class="glass p-6 rounded-3xl border ${p.popular ? 'border-amber-500/50 bg-gradient-to-b from-amber-500/10 to-transparent' : 'border-slate-800'} flex flex-col justify-between space-y-4 relative">
+      ${p.popular ? '<span class="absolute -top-3 right-6 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 text-xs font-black px-3 py-0.5 rounded-full uppercase tracking-wider">Most Popular</span>' : ''}
+      <div>
+        <h4 class="font-bold text-lg text-white">${p.name}</h4>
+        <p class="text-xs text-slate-400 mt-1">${p.desc}</p>
+        <div class="mt-4 flex items-baseline gap-1">
+          <span class="text-3xl font-black text-amber-400">₹${p.price_inr}</span>
+          <span class="text-xs text-slate-500">/ one-time</span>
+        </div>
+        <div class="mt-3 p-3 bg-slate-900/60 rounded-xl border border-slate-800 flex items-center gap-2">
+          <span class="text-xl">🪙</span>
+          <span class="font-bold text-white text-sm">+${p.credits} Skill Credits</span>
+        </div>
+      </div>
+      <button onclick="openTopupModal('${p.id}', '${p.name}', ${p.credits}, ${p.price_inr})" class="${p.popular ? 'btn-primary bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black' : 'btn-primary'} w-full text-xs py-2.5">
+        Buy ${p.credits} Credits →
+      </button>
+    </div>
+  `).join('');
+}
+
+function openTopupModal(id, name, credits, price) {
+  document.getElementById('pay-pack-id').value = id;
+  document.getElementById('pay-pack-name').textContent = name;
+  document.getElementById('pay-pack-credits').textContent = `+${credits} 🪙`;
+  document.getElementById('pay-pack-price').textContent = `₹${price}`;
+  document.getElementById('modal-payment').classList.remove('hidden');
+}
+
+async function confirmPayment() {
+  const package_id = document.getElementById('pay-pack-id').value;
+  const payment_method = document.getElementById('pay-method').value;
+  try {
+    const res = await api('POST', '/api/monetization/topup', { package_id, payment_method });
+    closeModal('modal-payment');
+    notify(res.message, 'success');
+    me.credit_balance = res.new_balance;
+    updateHeader();
+  } catch (e) {
+    notify(e.message, 'error');
+  }
+}
+
+async function loadWorkshops() {
+  const ws = await api('GET', '/api/monetization/workshops');
+  document.getElementById('workshops-grid').innerHTML = ws.map(w => `
+    <div class="glass p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
+      <div>
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+          <span>📅 ${w.date_time}</span>
+          <span class="text-rose-400 font-semibold">${w.seats_left} seats left</span>
+        </div>
+        <h4 class="font-bold text-base text-white">${w.title}</h4>
+        <p class="text-xs text-slate-400 mt-1">Instructor: ${w.instructor_name}</p>
+        <div class="flex flex-wrap gap-1 mt-3">
+          ${w.tags.map(t => `<span class="bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs px-2 py-0.5 rounded-md font-medium">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+        <span class="font-extrabold text-emerald-400 text-lg">₹${w.price_inr}</span>
+        <button onclick="bookWorkshop(${w.id})" class="btn-primary text-xs px-4 py-1.5">
+          Book Seat →
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function bookWorkshop(id) {
+  try {
+    const res = await api('POST', `/api/monetization/workshops/${id}/book`);
+    notify(res.message, 'success');
+    loadWorkshops();
+  } catch (e) {
+    notify(e.message, 'error');
+  }
+}
+
+async function loadCertificates() {
+  const certs = await api('GET', '/api/monetization/certificates');
+  const container = document.getElementById('certificates-list');
+  if (!certs.length) {
+    container.innerHTML = `<p class="text-xs text-slate-500 col-span-2">No certificates issued yet. Claim your peer mentoring certificate above!</p>`;
+    return;
+  }
+  container.innerHTML = certs.map(c => `
+    <div class="p-4 bg-slate-900/80 rounded-2xl border border-emerald-500/30 flex items-start gap-4">
+      <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl text-2xl shrink-0">📜</div>
+      <div class="min-w-0 flex-1">
+        <span class="text-xs font-mono text-emerald-400 font-bold">${c.certificate_id}</span>
+        <h4 class="font-bold text-sm text-white">${c.skill_name} Peer Mentor</h4>
+        <p class="text-xs text-slate-400 mt-0.5">${c.student_name} • ${c.hours_taught} hrs taught (${c.rating}⭐)</p>
+        <p class="text-xs text-slate-500 mt-1">Issued by ${c.college} on ${c.issued_date}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function claimCertificate() {
+  const skill = prompt('Enter the skill for your verified certificate (e.g. Python & Backend, Figma UI/UX):', 'Python & Backend');
+  if (!skill) return;
+  try {
+    const res = await api('POST', '/api/monetization/certificates/issue', { skill_name: skill });
+    notify(res.message, 'success');
+    loadCertificates();
+  } catch (e) {
+    notify(e.message, 'error');
+  }
+}
+
+function openCollegeInquiryModal() {
+  document.getElementById('modal-college-inquiry').classList.remove('hidden');
+}
+
+async function submitCollegeInquiry() {
+  const college_name = document.getElementById('inq-college').value.trim();
+  const contact_person = document.getElementById('inq-person').value.trim();
+  const email = document.getElementById('inq-email').value.trim();
+  const estimated_students = parseInt(document.getElementById('inq-students').value);
+  if (!college_name || !contact_person || !email) {
+    notify('Please fill in college name, contact person, and official email.', 'error');
+    return;
+  }
+  try {
+    const res = await api('POST', '/api/monetization/college/inquire', {
+      college_name, contact_person, email, estimated_students
+    });
+    closeModal('modal-college-inquiry');
+    notify(res.message, 'success');
+  } catch (e) {
+    notify(e.message, 'error');
+  }
 }
 
 // ─── REGISTER SKILL PICKERS ───────────────────────────────────────────────

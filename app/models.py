@@ -158,3 +158,30 @@ class ProjectPost(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     creator = relationship("User")
+
+
+class Certificate(Base):
+    __tablename__ = "certificates"
+
+    id = Column(Integer, primary_key=True, index=True)
+    certificate_id = Column(String, unique=True, index=True, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    skill_name = Column(String, nullable=False)
+    hours_taught = Column(Float, default=10.0)
+    rating = Column(Float, default=5.0)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    user = relationship("User")
+
+
+class Workshop(Base):
+    __tablename__ = "workshops"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    instructor_name = Column(String, nullable=False)
+    date_time = Column(String, nullable=False)
+    price_inr = Column(Integer, default=199)
+    seats_left = Column(Integer, default=30)
+    tags_json = Column(Text, default='[]')
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
