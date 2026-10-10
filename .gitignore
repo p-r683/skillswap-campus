@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+app/skillswap.db
+*.sqlite3
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+verify_*.py
+test_*.py
